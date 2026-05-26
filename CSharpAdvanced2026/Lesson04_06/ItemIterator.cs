@@ -2,12 +2,12 @@
 
 namespace Lesson04;
 
-public class ItemIterator : IEnumerator
+public class ItemIterator<J> : IEnumerator where J : class
 {
     int position = -1;
-    private Inventory inventory;
+    private Inventory<J> inventory;
 
-    public ItemIterator(Inventory inventory)
+    public ItemIterator(Inventory<J> inventory)
     {
         this.inventory = inventory;
     }

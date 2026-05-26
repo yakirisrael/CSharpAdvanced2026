@@ -2,19 +2,19 @@
 
 namespace Lesson04;
 
-public class Inventory : IEnumerable
+public class Inventory<K> : IEnumerable where K : class
 {
     const int defaultCapacity = 100;
-    private Item[] items;
+    private K[] items;
 
     public Inventory(int capacity)
     {
-        items = new Item[capacity];
+        items = new K[capacity];
     }
 
     public Inventory()
     {
-        items = new Item[defaultCapacity];
+        items = new K[defaultCapacity];
     }
 
     public int Capacity
@@ -29,7 +29,7 @@ public class Inventory : IEnumerable
         get
         {
             int count = 0;
-            foreach (Item it in items)
+            foreach (K it in items)
             {
                 if (it != null) count++;
             }
@@ -45,7 +45,7 @@ public class Inventory : IEnumerable
 
     }
 
-    public Item this[int index]
+    public K this[int index]
     {
         get
         {
@@ -80,6 +80,6 @@ public class Inventory : IEnumerable
 
     public IEnumerator GetEnumerator()
     {
-        return new ItemIterator(this);
+        return new ItemIterator<K>(this);
     }
 }

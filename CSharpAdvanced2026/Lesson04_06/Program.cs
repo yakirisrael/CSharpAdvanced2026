@@ -2,9 +2,17 @@
 
 using Lesson04;
 
-Inventory inv = new Inventory(); 
 
-Inventory inv2 = new Inventory(30); 
+    
+Inventory<string> inv_string = new Inventory<string>();
+inv_string[0] = "yan";
+
+//Inventory<int> inv_int = new Inventory<int>(30);
+//inv_int[0] = 123;
+
+Inventory<Item> inv = new (); 
+
+Inventory<Item> inv2 = new Inventory<Item>(30); 
 
 //Console.WriteLine("inv count = " + inv.Count);
 //Console.WriteLine("inv2 count = " + inv2.Count);
