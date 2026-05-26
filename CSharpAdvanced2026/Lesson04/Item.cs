@@ -6,6 +6,6 @@ public class Item
 
     override public string ToString()
     {
-        return "Item = " + Name;
+        return Name;
     }
 }
