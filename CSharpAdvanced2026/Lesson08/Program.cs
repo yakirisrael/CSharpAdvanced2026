@@ -39,19 +39,52 @@ Console.WriteLine($"Thread state {t.ThreadState}");
 Console.WriteLine($"Thread state {t2.ThreadState}");
 */
 
-void PrintHello(object val)
+CancellationTokenSource cts = new CancellationTokenSource();
+
+
+async Task LoadingAssets()
+{
+    try
+    {
+        Console.WriteLine(DateTime.Now);
+        await Task.Delay(10000, cts.Token);
+        Console.WriteLine(DateTime.Now);
+    }
+    catch
+    {
+        Console.WriteLine("Operation was canceled");
+    }
+}
+
+/*
+async Task PrintHello(object? val)
 {
     Console.WriteLine(DateTime.Now);
-    
     int ValInt = (int)val;
 
     for (int i = 0; i < ValInt; i++)
     {
         Console.WriteLine(i);
+        
     }
+}*/
+
+void CancelAction(object? obj)
+{
+    cts.Cancel();
+    Console.WriteLine(DateTime.Now);
 }
 
-Timer timer = new Timer(PrintHello, 10, 2000, 1000);
+Task taskLoadingAssets = Task.Run(LoadingAssets);
+Timer timer = new Timer(CancelAction, 10, 5000, Timeout.Infinite);
 Console.WriteLine(DateTime.Now);
+
+taskLoadingAssets.Wait(CancellationToken.None);
+
+Console.WriteLine("Finish Loading");
+//Task task1 = Task.Run(() => PrintHello(10));
+//Task task2 = Task.Run(PrintHello);
+
+
 
 Console.ReadLine();
